@@ -20,5 +20,23 @@ int main(){
     cout << "Value at address c is : " << *c << endl;   
     cout << "Value at add(c(add(b))) : " << **c << endl;  
 
+
+    // ARRAYS WITH POINTER
+
+    int array[5] = { 0, 1, 2, 3, 4};
+
+    // pointer start with 0th index
+    int* p = array;
+    cout << *p << endl;
+    
+    // first print then increment
+    cout << *(p++) << endl;
+    
+    // first increment then print
+    cout << *(++p) << endl;
+
+    // normal way
+    cout << *(p+1) << endl;
+
     return 0;
 }
