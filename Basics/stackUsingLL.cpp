@@ -10,7 +10,7 @@ class Node{
 class Stack{
     public:
         Node* top;
-        int count = 0;
+        int size = 0;
 
         // constructor
         Stack() { 
@@ -32,7 +32,7 @@ void Stack::push(int data) {
     Node* temp = new Node();
     temp->data = data;
 
-    if(count == 0){
+    if(size == 0){
         temp->next = NULL;
     }
     else{
@@ -40,19 +40,19 @@ void Stack::push(int data) {
     }
 
     top = temp;   
-    count++;
+    size++;
 }
 
 // remove first
 void Stack::pop() {
-    if (count == 0) {
+    if (size == 0) {
         cout << "Stack is empty : UNDERFLOW"<< endl;
-    } else if (count == 1) {
+    } else if (size == 1) {
        top = NULL;
-       count = 0;
+       size = 0;
     } else {
        top = top->next;
-       count--; 
+       size--; 
     }
 }
 
@@ -61,7 +61,7 @@ int Stack::peek() {
 }
 
 bool Stack::isEmpty(){
-    if(count == 0){
+    if(size == 0){
         cout << "Stack is empty"<< endl;
         return true;
     }
@@ -83,7 +83,7 @@ void Stack::display() {
             temp = temp->next;
         }
         cout << endl;
-        cout <<"Size of the Stack : " << count << endl;
+        cout <<"Size of the Stack : " << size << endl;
     }
 }
 
