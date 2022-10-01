@@ -46,7 +46,7 @@ void LinkedList::addLast(int data) {
         tail = temp;
     }
     else{
-        head->next = temp;
+        tail->next = temp;
         tail = temp;
     }
 
