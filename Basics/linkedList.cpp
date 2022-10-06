@@ -154,22 +154,88 @@ void LinkedList::display() {
             temp = temp->next;
         }
         cout << endl;
-        cout <<"Size of the list : " << size << endl;
+        cout <<"Size of list : " << size << endl;
     }
 }
 
 int main(){
     LinkedList* list = new LinkedList();
-    list->addLast(1);
-    list->addLast(2);
-    list->addFirst(3);
-    list->addFirst(4);
-    list->addAtIndex(2,5);
-    list->deleteFirst();
-    list->deleteLast();
-    list->deleteAtIndex(0);
+    cout << "CHOOSE ANY ONE OPTION" << endl;
+    cout << "========================" << endl;
+    cout << "1. Add last" << endl;
+    cout << "2. Add First" << endl;
+    cout << "3. Add At Any Index" << endl;
+    cout << "4. Delete last" << endl;
+    cout << "5. Delete First" << endl;
+    cout << "6. Delete At Any Index" << endl;
  
-    list->display();
-    delete list;
+    int n;
+    do{
+        cout << "Enter choice :";
+        cin >> n;
+
+        switch(n){
+            case 1 : {
+                int data;
+                cout << "Enter data :";
+                cin >> data;
+                list->addLast(data);
+                cout << "LIST -> ";
+                list->display();
+                cout<<endl;
+                break;
+            }
+            case 2 : {
+                int data;
+                cout << "Enter data :";
+                cin >> data;
+                list->addFirst(data);
+                cout << "LIST -> ";
+                list->display();
+                cout<<endl;
+                break;
+            }
+            case 3 : {
+                int data;
+                int idx;
+                cout << "Enter data :";
+                cin >> data;
+                cout << "Enter index :";
+                cin >> idx;
+                list->addAtIndex(idx , data);
+                cout << "LIST -> ";
+                list->display();
+                cout<<endl;
+                break;
+            }
+            case 4 : {
+                list->deleteLast();
+                cout << "Data deleted" << endl;
+                cout << "LIST -> ";
+                list->display();
+                cout<<endl;
+                break;
+            }
+            case 5 : {
+                list->deleteFirst();
+                cout << "Data deleted" << endl;
+                cout << "LIST -> ";
+                list->display();
+                cout<<endl;
+                break;
+            }
+            case 6 : {
+                int idx;
+                cout << "Enter index to delete :";
+                cin >> idx;
+                list->deleteAtIndex(idx);
+                cout << "Data deleted" << endl; 
+                cout << "LIST -> ";
+                list->display();
+                cout<<endl;
+                break;
+            }
+        }
+        }while(n>0 && n<7);
     return 0;
 }

@@ -83,24 +83,56 @@ void Stack::display() {
             temp = temp->next;
         }
         cout << endl;
-        cout <<"Size of the Stack : " << size << endl;
+        cout <<"Size of Stack : " << size << endl;
     }
 }
 
 
 int main(){
-   Stack* st = new Stack();
-   st->push(1);
-   st->push(5);
-   st->push(3);
-   st->push(10);
-   st->push(15);
-   st->pop();
-   st->pop();
-   st->peek();
-   st->isEmpty();
+    Stack* st = new Stack();
+    cout << "CHOOSE ANY ONE OPTION" << endl;
+    cout << "========================" << endl;
+    cout << "1. push()" << endl;
+    cout << "2. pop()" << endl;
+    cout << "3. top()" << endl;
+    cout << "4. isEmpty()" << endl;
+ 
+    int n;
+    do{
+        cout << "Enter choice :";
+        cin >> n;
 
-   st->display();
+        switch(n){
+            case 1 : {
+                int data;
+                cout << "Enter data :";
+                cin >> data;
+                st->push(data);
+                st->display();
+                cout<<endl;
+                break;
+            }
+            case 2 : {
+                st->pop();
+                st->display();
+                cout<<endl;
+                break;
+            }
+            case 3 : {
+                st->peek();
+                st->display();
+                cout<<endl;
+                break;
+            }
+            case 4 : {
+                st->isEmpty();
+                st->display();
+                cout<<endl;
+                break;
+            }
+        }
+
+    }while(n>0 && n<5);
 
    return 0;
 }
