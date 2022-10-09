@@ -108,24 +108,28 @@ int main(){
                 cout << "Enter data :";
                 cin >> data;
                 st->push(data);
+                cout <<"Stack -> ";
                 st->display();
                 cout<<endl;
                 break;
             }
             case 2 : {
                 st->pop();
+                cout <<"Stack -> ";
                 st->display();
                 cout<<endl;
                 break;
             }
             case 3 : {
                 st->peek();
+                cout <<"Stack -> ";
                 st->display();
                 cout<<endl;
                 break;
             }
             case 4 : {
                 st->isEmpty();
+                cout <<"Stack -> ";
                 st->display();
                 cout<<endl;
                 break;
