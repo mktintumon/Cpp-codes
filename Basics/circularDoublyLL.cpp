@@ -87,6 +87,7 @@ class DCLinkedList{
 		newN->next = temp->next;
 		temp->next->prev = newN;
 		temp->next = newN;
+		size++;
 	}
 	
 	void deleteFisrt(){
@@ -154,38 +155,15 @@ class DCLinkedList{
 			cout << temp->val << " ";
 			temp = temp->next;
 		}
-		cout << temp->val << " ";	
-		cout << endl;
+		cout << temp->val << " " << endl;	
+		cout << "Size : " << size << endl;
 	} 
-	
-	void displayWithArrow(){
-		if(head == NULL)
-			return;
-		Node* temp = head;
-		cout << size << endl;
-		while(temp->next != head){
-			if(temp->prev != NULL)
-				cout << temp->prev->val << " <- ";
-			cout << temp->val << " -> ";
-			if(temp->next != NULL)
-				cout << temp->next->val << " ";
-			temp = temp->next;
-			cout <<endl;
-		}
-		if(temp->prev != NULL)
-			cout << temp->prev->val << " <- ";
-		cout << temp->val << " -> ";
-		if(temp->next != NULL)
-			cout << temp->next->val << " ";
-		temp = temp->next;
-		cout <<endl;
-	}
 	 
 };
 
  main(){
 	DCLinkedList *list = new DCLinkedList();
-	cout << "LinkedList" << endl<<endl;
+	
 	cout << "Choose any one..."<<endl ;
 	cout << " 1. Add value at first"<<endl;
 	cout << " 2. Add value at last"<<endl;
@@ -193,20 +171,20 @@ class DCLinkedList{
 	cout << " 4. Delete first"<<endl;
 	cout << " 5. Delete last"<<endl;
 	cout << " 6. Delete given data"<<endl;
-	cout << " 7. Display"<<endl;
-	cout << " 8. Display with arrow"<<endl;
 	cout << endl;
 	int n;
 	
 	do{
-		cout << ">>";
+		cout << "Enter choice >>";
 		cin >> n;
-		switch👎{
+		switch(n){
 			case 1:{
 				cout <<"Enter value : ";
 				int data;
 				cin >> data;
 				list->addAtFirst(data);
+				cout << "LIST -> ";
+				list->display();
 				cout<<endl;
 				break;
 			}
@@ -215,6 +193,8 @@ class DCLinkedList{
 				int data;
 				cin >> data;
 				list->addAtEnd(data);
+				cout << "LIST -> ";
+				list->display();
 				cout<<endl;
 				break;
 			}
@@ -225,19 +205,22 @@ class DCLinkedList{
 				cout << "Enter position :";
 				cin >> pos;
 				list->addAtPos(data, pos);
+				cout << "LIST -> ";
+				list->display();
 				cout<<endl;
 				break;
 			}
 			case 4:{
 				list->deleteFisrt();
-				cout<<"Item deleted successfully !!";
-				cout<<endl<<endl;
+				cout << "LIST -> ";
+				list->display();
+				cout<<endl;
 				break;
 			}
 			case 5:{
 				list->deleteEnd();
-				cout<<"Item deleted successfully !!";
-				cout<<endl<<endl;
+				list->display();
+				cout<<endl;
 				break;
 			}
 			case 6:{
@@ -245,23 +228,12 @@ class DCLinkedList{
 				int data;
 				cin >> data;
 				list->deleteData(data);
-				cout<<"Item deleted successfully !!";
-				cout<<endl<<endl;
-				break;
-			}
-			case 7:{
-				cout << "List : ";
+				cout << "LIST -> ";
 				list->display();
 				cout<<endl;
 				break;
 			}
-			case 8:{
-				cout << "List : ";
-				list->displayWithArrow();
-				cout<<endl;
-				break;
-			}
 		}
-	}while(n>0 && n < 9);
+	}while(n>0 && n < 7);
 	
 }

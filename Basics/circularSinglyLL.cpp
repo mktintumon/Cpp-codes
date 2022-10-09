@@ -78,6 +78,7 @@ class CLinkedList{
 		}
 		newN->next = temp->next;
 		temp->next = newN;
+		size++;
 	}
 	
 	void deleteFisrt(){
@@ -135,26 +136,28 @@ class CLinkedList{
 	}
 	
 	void display(){
-		if(head == NULL)
+		if(head == NULL){
+
 			return;
+		}
 		Node* temp = head;
 		while(temp->next != head){
 			cout << temp->val << " ";
 			temp = temp->next;
 		}
-		cout << temp->val << " ";	
-		cout << endl;
+		cout << temp->val << " " << endl;	
+		cout << "Size is -> " << size << endl;
 	}
 	 
 };
 
  main(){
 	CLinkedList *list = new CLinkedList();
-	cout << "LinkedList" << endl<<endl;
-	cout << "Choose any one..."<<endl ;
-	cout << " 1. Add value at first"<<endl;
-	cout << " 2. Add value at last"<<endl;
-	cout << " 3. Add value at given position"<<endl;
+	cout << "CHOOSE ANY ONE OPTION" << endl;
+    cout << "========================" << endl;
+	cout << " 1. Add first"<<endl;
+	cout << " 2. Add last"<<endl;
+	cout << " 3. Add at given index"<<endl;
 	cout << " 4. Delete first"<<endl;
 	cout << " 5. Delete last"<<endl;
 	cout << " 6. Delete given data"<<endl;
@@ -163,7 +166,7 @@ class CLinkedList{
 	int n;
 	
 	do{
-		cout << ">>";
+		cout << "Enter choice >> ";
 		cin >> n;
 		switch(n){
 			case 1:{
