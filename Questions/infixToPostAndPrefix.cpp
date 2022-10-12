@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include<stack>
 #include <ctype.h>
 using namespace std;
 
@@ -6,6 +7,26 @@ using namespace std;
 int precd(char ch){
     if(ch == '+' || ch == '-') return 1;
     else return 2; //  -->(* ans /)
+}
+
+void operations(stack<string> &prefix ,stack<string> &postfix,stack<char> &optr){
+    char op = optr.top();
+    optr.pop();
+    string s = string(1,op);
+
+    //prefix
+    string pre2 = prefix.top();
+    prefix.pop();
+    string pre1 = prefix.top();
+    prefix.pop();
+    prefix.push(s + pre1 + pre2);
+
+    //postfix
+    string post2 = postfix.top();
+    postfix.pop();
+    string post1 = postfix.top();
+    postfix.pop();
+    postfix.push(post1 + post2 + s);
 }
  
 int main(){
@@ -30,68 +51,20 @@ int main(){
         }
         else if(ch == ')'){
             while(optr.size() > 0 && optr.top() != '('){
-                char op = optr.top();
-                optr.pop();
-                string s = string(1,op);
-
-                //prefix
-                string pre2 = prefix.top();
-                prefix.pop();
-                string pre1 = prefix.top();
-                prefix.pop();
-                prefix.push(s + pre1 + pre2);
-
-                //postfix
-                string post2 = postfix.top();
-                postfix.pop();
-                string post1 = postfix.top();
-                postfix.pop();
-                postfix.push(post1 + post2 + s);
+                operations(prefix , postfix, optr);
             }
             optr.pop();
         }
         else if(ch == '+' || ch == '-' || ch == '*' || ch == '/'){
             while(optr.size() > 0 && optr.top() != '(' && precd(ch) <= precd(optr.top())){
-                char op = optr.top();
-                optr.pop();
-                string s = string(1,op);
-
-                //prefix
-                string pre2 = prefix.top();
-                prefix.pop();
-                string pre1 = prefix.top();
-                prefix.pop();
-                prefix.push(s + pre1 + pre2);
-
-                //postfix
-                string post2 = postfix.top();
-                postfix.pop();
-                string post1 = postfix.top();
-                postfix.pop();
-                postfix.push(post1 + post2 + s);
+                operations(prefix , postfix, optr);
             }
             optr.push(ch);
         }
     }
 
     while(optr.size() >  0){
-        char op = optr.top();
-        optr.pop();
-        string s = string(1,op);
-
-        //prefix
-        string pre2 = prefix.top();
-        prefix.pop();
-        string pre1 = prefix.top();
-        prefix.pop();
-        prefix.push(s + pre1 + pre2);
-
-        //postfix
-        string post2 = postfix.top();
-        postfix.pop();
-        string post1 = postfix.top();
-        postfix.pop();
-        postfix.push(post1 + post2 + s);
+        operations(prefix , postfix, optr);
     }
 
     cout << endl;

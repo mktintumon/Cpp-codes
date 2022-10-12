@@ -2,6 +2,7 @@
 #include <ctype.h>
 using namespace std;
 
+
 // precedence checker
 int precd(char ch){
     if(ch == '+' || ch == '-') return 1;
@@ -15,6 +16,18 @@ int calc(char optr , int v1 , int v2){
     else if(optr == '*') return  v1 * v2;
     else if(optr == '/') return  v1 / v2;
     else return 0;
+}
+
+int opeartions(stack<int> &digit ,stack<char> &optr){
+    int v2 = digit.top();
+    digit.pop();
+    int v1 = digit.top();
+    digit.pop();
+    int optr1 = optr.top();
+    optr.pop();
+
+    int ans = calc(optr1 , v1 , v2);
+    digit.push(ans);
 }
 
 int main(){
@@ -37,30 +50,14 @@ int main(){
         }
         else if(ch == '+' || ch == '-' || ch == '*' || ch == '/'){
             while(optr.size() > 0 && optr.top() != '(' && precd(ch) <= precd(optr.top())){
-                int v2 = digit.top();
-                digit.pop();
-                int v1 = digit.top();
-                digit.pop();
-                int optr1 = optr.top();
-                optr.pop();
-
-                int ans = calc(optr1 , v1 , v2);
-                digit.push(ans);
+                opeartions(digit,optr);
             }
 
             optr.push(ch);
         }
         else if(ch == ')'){
             while(optr.size() > 0 && optr.top() != '('){
-                int v2 = digit.top();
-                digit.pop();
-                int v1 = digit.top();
-                digit.pop();
-                int optr1 = optr.top();
-                optr.pop();
-
-                int ans = calc(optr1 , v1 , v2);
-                digit.push(ans);
+                opeartions(digit,optr);
             }
 
             if(optr.size() > 0) optr.pop();
@@ -68,15 +65,7 @@ int main(){
     }
 
     while(optr.size() > 0){
-        int v2 = digit.top();
-        digit.pop();
-        int v1 = digit.top();
-        digit.pop();
-        int optr1 = optr.top();
-        optr.pop();
-
-        int ans = calc(optr1 , v1 , v2);
-        digit.push(ans);
+        opeartions(digit,optr);
     }
 
     int ans = digit.top();
