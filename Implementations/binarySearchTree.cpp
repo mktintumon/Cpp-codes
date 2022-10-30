@@ -141,8 +141,7 @@ bool BSTree::search(int data){
     cout << endl;
 }
 
-
-// REMOVE FUNCTION NOT WORKING
+// perfect
 Node* BSTree::remove(Node* node , int data){
     if(root  == NULL){
         return NULL;
@@ -155,15 +154,17 @@ Node* BSTree::remove(Node* node , int data){
         node->left = remove(node->left, data);
     }
     else{
-        //0 child  OR  1 child
-        if(node->left == NULL || node->right == NULL ){
-            return node->left != NULL ? node->left : node->right;
+        if(node->left == NULL){
+            return node->right;
+        }
+        else if(node->right == NULL){
+            return node->left;
         }
         
         // 2  child
-        int maxEle = max(node->left);
+        int maxEle = min(node->right);
         node->data = maxEle;
-        node->left = remove(node->left, maxEle);
+        node->right = remove(node->right, maxEle);
         
     }
     return node;
@@ -224,7 +225,7 @@ int main(){
     tree->postorder();
 
     cout << "Search data : ";
-    bool found = tree->search(18);
+    bool found = tree->search(29);
     if(found) cout << "Found";
     else cout << "Not Found";
     cout<< endl;
@@ -235,8 +236,13 @@ int main(){
     cout << "Min. data : " << tree->min();
     cout << endl;
 
-    // cout << "Removing key 15" << endl;
-    // tree->remove(23);
+    cout << "Removing key " << endl;
+    tree->remove(23);
+
+    cout << "Tree data: \n";
+    cout << "================\n";
+    tree->display();
+    cout << endl;
 
     cout << endl;
     return 0;
