@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void bucketSort(int arr[] , int n){
-    vector<int> bucket[n];
-    int minEle = arr[0];
-    int maxEle = arr[0];
+void bucketSort(float arr[] , int n){
+    vector<float> bucket[n];
+    float minEle = arr[0];
+    float maxEle = arr[0];
 
     for(int i=0; i<n; i++){
         minEle = min(arr[i], minEle);
@@ -41,7 +41,7 @@ int main(){
     int n;
     cout << "Enter size of array : ";
     cin>>n;
-    int arr[n];
+    float arr[n];
 
     cout << "Enter " << n << " numbers : "; 
     for(int i=0; i<n; i++){
@@ -52,7 +52,7 @@ int main(){
 
     cout << "Sorted array : ";
     for(int i=0; i<n; i++){
-        cout<< arr[i] << " ";
+        cout<< arr[i] << "  ";
     }
     return 0;
 }
