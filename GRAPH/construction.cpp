@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 // ADJACENCY LIST METHOD
@@ -40,7 +40,7 @@ class Graph{
         }
 
         void dfs_Traversal();
-        void bfs_Traversal();
+        //void bfs_Traversal();
 };
 
 void dfs(int src , vector<Edge> adj[] , int vis[] , vector<int> &list){
@@ -70,18 +70,13 @@ void Graph::dfs_Traversal(){
 
 
 
-
-
-
-
 int main(){
-    int n = 5;
+    int n = 4;
     Graph g(n);
-    g.addEdge(0,2,10);
-    g.addEdge(0,1,20);
-    g.addEdge(1,4,30);
-    g.addEdge(1,2,40);
-    g.addEdge(4,3,50);
+    g.addEdge(0,1,10);
+    g.addEdge(0,3,20);
+    g.addEdge(1,2,30);
+    g.addEdge(2,3,40);
 
     cout << "ADJACENCY LIST VIEW OF GRAPH :"<<endl;
     cout << "================================================"<<endl;
@@ -91,6 +86,10 @@ int main(){
     cout << "DFS TRAVERSAL -> ";
     g.dfs_Traversal();
     cout<<endl;
+
+    // cout << "BFS TRAVERSAL -> ";
+    // g.bfs_Traversal();
+    // cout<<endl;
 
     return 0;
 }
