@@ -78,10 +78,6 @@ void Graph::bfs_Traversal(){
         Edge rem = qu.front();
         qu.pop();
 
-        if(vis[rem.u] == 1){
-            continue;
-        }
-
         vis[rem.u] = 1;
         cout << rem.u << " ";
 
