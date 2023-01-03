@@ -31,16 +31,17 @@ class Graph{
 
         void printGraph(){
             for(int i=0 ; i<V; i++){
-                cout << "Vertex " << i << " -> ";
+                cout << "Vertex " << i << " -> [";
                 for(Edge nbr : adj[i]){
-                    cout << "[" << nbr.u << " - " << nbr.v  << " @ " <<  nbr.wt << "] , " ;
+                    cout << nbr.v << ","; 
+                    //cout << "[" << nbr.u << " - " << nbr.v  << " @ " <<  nbr.wt << "] , " ;
                 }
-                cout << endl;
+                cout << "]"<<endl;
             }
         }
 
         void dfs_Traversal();
-        //void bfs_Traversal();
+        void bfs_Traversal();
 };
 
 void dfs(int src , vector<Edge> adj[] , int vis[] , vector<int> &list){
@@ -68,15 +69,41 @@ void Graph::dfs_Traversal(){
     }
 }
 
+void Graph::bfs_Traversal(){
+    queue<Edge> qu;
+    int vis[V]={0};
+    qu.push(Edge(0,1,10));
+
+    while(qu.size() > 0){
+        Edge rem = qu.front();
+        qu.pop();
+
+        if(vis[rem.u] == 1){
+            continue;
+        }
+
+        vis[rem.u] = 1;
+        cout << rem.u << " ";
+
+        for(Edge e : adj[rem.u]){
+            if(vis[e.v] == 0){
+                qu.push(Edge(e.v,e.u,e.wt));
+            }  
+        }
+    }
+}
+
 
 
 int main(){
-    int n = 4;
+    int n = 6;
     Graph g(n);
-    g.addEdge(0,1,10);
+    g.addEdge(0,2,10);
     g.addEdge(0,3,20);
-    g.addEdge(1,2,30);
-    g.addEdge(2,3,40);
+    g.addEdge(0,1,30);
+    g.addEdge(2,4,40);
+    g.addEdge(4,5,60);
+    
 
     cout << "ADJACENCY LIST VIEW OF GRAPH :"<<endl;
     cout << "================================================"<<endl;
@@ -87,9 +114,9 @@ int main(){
     g.dfs_Traversal();
     cout<<endl;
 
-    // cout << "BFS TRAVERSAL -> ";
-    // g.bfs_Traversal();
-    // cout<<endl;
+    cout << "BFS TRAVERSAL -> ";
+    g.bfs_Traversal();
+    cout<<endl;
 
     return 0;
 }
