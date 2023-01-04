@@ -45,6 +45,7 @@ class Graph{
 
 
 void Graph::primsAlgo(){
+    // This PQ will give min element from the queue
     priority_queue<pair<int,int>,vector<pair<int,int>>, greater<pair<int,int>>>qu;
     int vis[V];
     memset(vis, 0, sizeof(vis));
