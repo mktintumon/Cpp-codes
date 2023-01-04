@@ -60,7 +60,6 @@ void dfs(int src , vector<Edge> adj[] , int vis[] , vector<int> &list){
 
 void Graph::dfs_Traversal(){
     int vis[V]={0};
-    int start = 0;
     vector<int> list;
     dfs(0,adj,vis,list);
 
