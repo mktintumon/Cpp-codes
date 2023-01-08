@@ -71,7 +71,7 @@ void Graph::primsAlgo(){
         }
     }
 
-    cout << "MIN COST -> " << minCost;
+    cout << "MIN COST using PRIMS -> " << minCost;
 }
 
 
