@@ -34,7 +34,7 @@ class Graph{
                 cout << "Vertex " << i << " -> [";
                 for(Edge nbr : adj[i]){
                     cout << nbr.v << ","; 
-                    //cout << "[" << nbr.u << " - " << nbr.v  << " @ " <<  nbr.wt << "] , " ;
+                    
                 }
                 cout << "]"<<endl;
             }
@@ -57,7 +57,7 @@ void Graph::DijkstraAlgo(){
         Edge rem = qu.front();
         qu.pop();
 
-        for(Edge e : adj[rem.u]){
+        for(auto e : adj[rem.u]){
             int u = e.u;
             int v = e.v;
             int wt = e.wt;
