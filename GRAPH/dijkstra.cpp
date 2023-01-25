@@ -32,7 +32,7 @@ class Graph{
         void printGraph(){
             for(int i=0 ; i<V; i++){
                 cout << "Vertex " << i << " -> [";
-                for(Edge nbr : adj[i]){
+                for(auto nbr : adj[i]){
                     cout << nbr.v << ","; 
                     
                 }
