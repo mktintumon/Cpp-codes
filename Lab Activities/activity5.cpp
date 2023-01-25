@@ -6,113 +6,109 @@
     and processing using arrays with Queue ADT.
 */
 
-#include<iostream>
+#include <iostream>
 using namespace std;
-
-class Node{
-    public:
-        int data;
-        Node* next;
-};
-
-class Queue{
-    public:
-        Node* front;
-        Node* rear;
-        int size = 0;
-
-        // constructor
-        Queue() { 
-            front = NULL;
-            rear = NULL;
-        }
-
-        // destructor
-        ~Queue() {}; 
-
-        void enqueue(int data);
-        void dequeue();
-        int peek();
-        bool isEmpty();
-        void display();
-};
-
-// add first element to queue -> backside
-void Queue::enqueue(int data) {
-    Node* temp = new Node();
-    temp->data = data;
-    temp->next = rear;
-
-    rear = temp;
-    if(size == 0) 
-      front = temp;
-
-    size++;
+#define MaxRider 20
+struct Queue
+{
+    // structure for Queue ADT
+    int Rider[MaxRider];
+    int First;
+    // begning of the Queue
+    int Rear;
+    // Ending of the queue
+} r;
+bool Queue_is_full()
+{
+    // return true if Queue is Full else return false
+    return r.Rear == MaxRider - 1;
 }
-
-// remove last element from queue -> frontside
-void Queue::dequeue() {
-    if (size == 0) {
-        cout << "Queue is empty"<< endl;
-    } else if (size == 1) {
-       front = rear = NULL;
-       size = 0;
-    } else {
-       Node* temp = rear;
-       for(int i = 0; i < size-2 ; i++) {
-            temp = temp->next;
-       }
-
-       front = temp;
-       front->next = NULL;
-       size--;
-    }
+bool Queue_is_empty()
+{
+    // return true if Queue is empty else return false
+    return r.Rear == -1;
 }
-
-int Queue::peek() {
-    if(size == 0) cout << "Queue is empty"<< endl;
-    else cout << "Front element is : " << front->data << endl;
+void enqueue()
+{
+    // push rider in the queue
+    int n;
+    cout << "Enter rider number: ";
+    cin >> n;
+    if (!Queue_is_full())
+        r.Rider[++r.Rear] = n;
+    // increment rear whenever a rider is pushed in the queue
+    else
+        cout << "\nThis Queue is now full, allow riders to enter in Rollar Coaster to continue...\n";
 }
-
-bool Queue::isEmpty(){
-    if(size == 0){
-        cout << "Queue is empty"<< endl;
-        return true;
+void dequeue()
+{
+    // To empty the queue, and allow space for new riders
+    if (!Queue_is_empty())
+    {
+        cout << "\nRider number " << r.Rider[r.First] << " is allowed to the Roller Coaster";
+        r.First++;
     }
-    else{
-        cout << "Queue is NOT empty"<< endl;
-        return false;
-    }
-} 
-
-void Queue::display() {
-    if (front == NULL && rear == NULL) {
-        cout << "Queue is empty!" << endl;
-    }
-    else {
-        Node* temp = rear;
-        while (temp != NULL) {
-            cout << temp->data << " ";
-            temp = temp->next;
+    else
+        cout << "\nQueue is currently empty!!";
+}
+int main()
+{
+    r.First = 0;
+    r.Rear = -1;
+    int c;
+    // initial value of first and rear of the queue
+    cout << "\t\t\t****Menue****\n\n";
+    while (c != 4)
+    {
+        cout << "Enter 1 : To allow the rider in the Queue\n";
+        cout << "Enter 2 : To check if Queue is full and to allow all riders to enter the Roller Coaster\n";
+        cout << "Enter 3 : To see all riders in Queue\n";
+        cout << "Enter 4 : To Exit\n";
+        cout << "Enter input: ";
+        cin >> c;
+        switch (c)
+        {
+        case 1:
+            enqueue();
+            // function to push rider in the queue
+            break;
+        case 2:
+            if (Queue_is_full())
+            {
+                // check if queue is full
+                for (int i = 1; i <= MaxRider; i++)
+                {
+                    dequeue();
+                    if (i == MaxRider)
+                        // if queue becomes empty reset the value of first and rear
+                        r.First = 0, r.Rear = -1;
+                }
+                cout << endl;
+            }
+            else
+                cout << "\nNot enough riders in the queue\n";
+            // message when ride cannot operate
+            break;
+        case 3:
+            cout << "\nCurrent Queue status is\nRider Number: ";
+            // to display the riders in the queue
+            if (r.Rear == -1)
+                cout << "Queue is Empty";
+            else
+            {
+                for (int i = 0; i <= r.Rear; i++)
+                    // iterating over the array of riders
+                    if (i != r.Rear)
+                        cout << r.Rider[i] << ", ";
+                    else
+                        cout << r.Rider[i] << ".";
+            }
+            cout << endl;
+            break;
+        case 4:
+            break;
         }
         cout << endl;
-        cout <<"Size of the Queue : " << size << endl;
     }
-}
- 
-int main(){
-  Queue* qu = new Queue();
-    qu->enqueue(5);
-    qu->enqueue(6);
-    qu->enqueue(7);
-    qu->enqueue(8);
-    qu->enqueue(9);
-    qu->dequeue();
-    qu->dequeue();
-    qu->peek();
-    qu->isEmpty();
-
-    qu->display();
-
-  return 0;
+    return 0;
 }
